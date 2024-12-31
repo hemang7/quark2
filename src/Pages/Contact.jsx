@@ -43,6 +43,7 @@ const Contact = () => {
     const mobile = form.current.user_mobile.value.trim();
     let formIsValid = true;
 
+    // Name validation
     if (!name) {
       toast({
         title: "Error",
@@ -54,6 +55,7 @@ const Contact = () => {
       formIsValid = false;
     }
 
+    // Mobile validation
     if (!mobile) {
       toast({
         title: "Error",
@@ -74,6 +76,7 @@ const Contact = () => {
       formIsValid = false;
     }
 
+    // Email validation
     if (!email) {
       toast({
         title: "Error",
@@ -93,6 +96,8 @@ const Contact = () => {
       });
       formIsValid = false;
     }
+
+    // Message validation
 
     return formIsValid;
   };
@@ -133,60 +138,168 @@ const Contact = () => {
       a: "We offer a wide range of consultancy services in areas such as optimization, product development, quality control, and regulatory compliance.",
       expanded: true,
     },
-    // Add additional FAQs here
+    {
+      q: "How can I schedule a consultation?",
+      a: "You can schedule a consultation by contacting us through phone or email. Our team will assist you in setting up a convenient time.",
+    },
+    {
+      q: "What are your areas of expertise?",
+      a: "We specialize in providing consultancy services in areas such as process optimization, product development, quality control, and regulatory compliance.",
+    },
+    {
+      q: "Do you provide assistance in obtaining regulatory approvals for products?",
+      a: "Yes, we have expertise in navigating the regulatory landscape and can support you in obtaining necessary approvals and certifications for your products, including compliance with safety and labeling requirements.",
+    },
   ];
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 px-5 py-10">
-      <div className="flex flex-col items-center w-full max-w-5xl bg-white rounded-md shadow-md">
-        <h1 className="text-4xl font-bold mb-6">Contact Us</h1>
-        <div className="flex flex-col md:flex-row w-full">
-          <div className="flex items-center justify-center md:w-1/2 p-5">
+    <div className="container px-5 py-10 md:my-10 mt-1">
+      <div className="flex justify-center">
+        <div
+          className="flex flex-col md:flex-row items-center md:rounded mt-2"
+          style={{ marginBottom: "2rem" }}
+        >
+          <div className="md:w-1/2 ">
             <img
               src={contact}
-              alt="Contact"
-              className="rounded-md max-w-full h-auto"
+              alt="Company"
+              className="m-auto rounded-md sm:mt-7"
             />
           </div>
-          <div className="md:w-1/2 p-5">
-            <form onSubmit={sendEmail} ref={form} className="space-y-4">
+          <div className="md:w-1/2 mt-3 md:my-1 ">
+            <h4
+              className={`flex justify-center text-5xl text-bold mb-4 sm:mt-0 mt-10 ${
+                fadeIn ? "fade-in" : ""
+              }`}
+            >
+              Contact Us
+            </h4>
+            <hr className="w-48 h-1 mx-auto mb-12 bg-blue-300" />
+            <div className={`fade-in ${fadeIn ? "fade-in-delayed" : ""}`}>
+              <p className="text-lg text-center">
+                We are passionate about leveraging technology in agriculture and
+                are here to provide innovative solutions tailored to your
+                specific needs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-col md:flex-row mt-12 bg-blue-800 rounded-md p-10">
+        <div className="md:w-1/2 md:ml-8 flex justify-center sm:mt-3 md:order-2">
+          <div>
+            <h2 className="text-2xl font-bold mb-4 text-white">
+              <img
+                src={Logo}
+                alt="logo"
+                className="h-10 w-auto inline-block mr-2 bg-white rounded"
+              />
+            </h2>
+            <p
+              className="text-white mb-2 hover:text-pink-500 cursor-pointer"
+              onClick={handleMapClick}
+            >
+              <FontAwesomeIcon
+                icon={faMapMarkerAlt}
+                className="inline text-white mr-2"
+              />
+              8, Khasra No. 28
+              <br />
+              Kuri Bhagtasni, Jodhpur
+              <br />
+              Rajasthan, India 342013
+            </p>
+            <p
+              className="text-white py-2 cursor-pointer hover:text-pink-500"
+              onClick={handleEmailClick}
+            >
+              <FontAwesomeIcon
+                icon={faEnvelope}
+                className="inline text-white mr-2"
+              />
+              quarkcs0702@gmail.com
+            </p>
+            <p
+              className="text-white cursor-pointer hover:text-pink-500"
+              onClick={() => handlePhoneClick("+91 123456789")}
+            >
+              <FontAwesomeIcon
+                icon={faPhone}
+                className="inline text-white mr-2"
+              />
+              (+91) 7878308980
+            </p>
+          </div>
+        </div>
+        <div className="md:w-1/2 md:mr-8 flex justify-center md:order-1">
+          <form onSubmit={sendEmail} ref={form} className="w-full">
+            <div className="mb-6">
+              <label htmlFor="name" className="text-white">
+                Name
+              </label>
               <input
                 type="text"
+                id="name"
                 name="user_name"
-                placeholder="Name"
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="px-4 py-2 mt-2 rounded-md text-black w-full focus:outline-none"
               />
+            </div>
+            <div className="mb-6">
+              <label htmlFor="mobile" className="text-white">
+                Mobile Number
+              </label>
+              <input
+                type="number"
+                id="mobile"
+                name="user_mobile"
+                className="px-4 py-2 mt-2 rounded-md text-black w-full focus:outline-none"
+              />
+            </div>
+            <div className="mb-6">
+              <label htmlFor="email" className="text-white">
+                Email
+              </label>
               <input
                 type="email"
+                id="email"
                 name="user_email"
-                placeholder="Email"
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="px-4 py-2 mt-2 rounded-md text-black w-full focus:outline-none"
               />
-              <input
-                type="text"
-                name="user_mobile"
-                placeholder="Mobile"
-                className="w-full p-2 border border-gray-300 rounded-md"
-              />
+            </div>
+            <div className="mb-6">
+              <label htmlFor="message" className="text-white">
+                Message
+              </label>
               <textarea
+                id="message"
                 name="message"
-                placeholder="Message"
                 rows="4"
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="px-4 py-2 mt-2 rounded-md text-black w-full focus:outline-none"
               ></textarea>
+            </div>
+
+            <div className="mb-6 flex justify-center">
               <button
                 type="submit"
-                className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
+                value="Send"
+                style={{ minWidth: "8rem" }}
+                className="bg-blue-600 text-white md:w-1/4 flex-shrink-0 px-4 py-2 rounded-lg hover:bg-blue-900"
               >
                 Submit
               </button>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
-        <Faq faqs={faqs} />
+      </div>
+      <div className="m-8">
+        <Faq faqs={faqs} defaultAllExpanded={false} />
       </div>
     </div>
   );
 };
 
 export default Contact;
+
+
+make sure it is centered on all screens
