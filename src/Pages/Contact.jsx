@@ -301,5 +301,3 @@ const Contact = () => {
 
 export default Contact;
 
-
-make sure it is centered on all screens
