@@ -97,8 +97,6 @@ const Contact = () => {
       formIsValid = false;
     }
 
-    // Message validation
-
     return formIsValid;
   };
 
@@ -153,20 +151,20 @@ const Contact = () => {
   ];
 
   return (
-    <div className="container px-5 py-10 md:my-10 mt-1">
+    <div className="container mx-auto px-5 py-10 md:my-10 mt-1">
       <div className="flex justify-center">
         <div
           className="flex flex-col md:flex-row items-center md:rounded mt-2"
           style={{ marginBottom: "2rem" }}
         >
-          <div className="md:w-1/2 ">
+          <div className="md:w-1/2">
             <img
               src={contact}
               alt="Company"
               className="m-auto rounded-md sm:mt-7"
             />
           </div>
-          <div className="md:w-1/2 mt-3 md:my-1 ">
+          <div className="md:w-1/2 mt-3 md:my-1">
             <h4
               className={`flex justify-center text-5xl text-bold mb-4 sm:mt-0 mt-10 ${
                 fadeIn ? "fade-in" : ""
@@ -186,7 +184,7 @@ const Contact = () => {
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row mt-12 bg-blue-800 rounded-md p-10">
+      <div className="flex flex-col md:flex-row mt-12 bg-blue-800 rounded-md p-10 mx-auto max-w-6xl">
         <div className="md:w-1/2 md:ml-8 flex justify-center sm:mt-3 md:order-2">
           <div>
             <h2 className="text-2xl font-bold mb-4 text-white">
@@ -233,7 +231,7 @@ const Contact = () => {
           </div>
         </div>
         <div className="md:w-1/2 md:mr-8 flex justify-center md:order-1">
-          <form onSubmit={sendEmail} ref={form} className="w-full">
+          <form onSubmit={sendEmail} ref={form} className="w-full max-w-md">
             <div className="mb-6">
               <label htmlFor="name" className="text-white">
                 Name
@@ -300,4 +298,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
