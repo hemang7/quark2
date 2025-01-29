@@ -184,112 +184,116 @@ const Contact = () => {
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row mt-12 bg-blue-800 rounded-md p-10 mx-auto max-w-6xl">
-        <div className="md:w-1/2 md:ml-8 flex justify-center sm:mt-3 md:order-2">
-          <div>
-            <h2 className="text-2xl font-bold mb-4 text-white">
-              <img
-                src={Logo}
-                alt="logo"
-                className="h-10 w-auto inline-block mr-2 bg-white rounded"
-              />
-            </h2>
-            <p
-              className="text-white mb-2 hover:text-pink-500 cursor-pointer"
-              onClick={handleMapClick}
-            >
-              <FontAwesomeIcon
-                icon={faMapMarkerAlt}
-                className="inline text-white mr-2"
-              />
-              8, Khasra No. 28
-              <br />
-              Kuri Bhagtasni, Jodhpur
-              <br />
-              Rajasthan, India 342013
-            </p>
-            <p
-              className="text-white py-2 cursor-pointer hover:text-pink-500"
-              onClick={handleEmailClick}
-            >
-              <FontAwesomeIcon
-                icon={faEnvelope}
-                className="inline text-white mr-2"
-              />
-              quarkcs0702@gmail.com
-            </p>
-            <p
-              className="text-white cursor-pointer hover:text-pink-500"
-              onClick={() => handlePhoneClick("+91 123456789")}
-            >
-              <FontAwesomeIcon
-                icon={faPhone}
-                className="inline text-white mr-2"
-              />
-              (+91) 7878308980
-            </p>
+      {/* Full-width blue background section */}
+      <div className="w-full bg-blue-800 py-10">
+        <div className="flex flex-col md:flex-row mx-auto max-w-6xl px-5">
+          <div className="md:w-1/2 md:ml-8 flex justify-center sm:mt-3 md:order-2">
+            <div>
+              <h2 className="text-2xl font-bold mb-4 text-white">
+                <img
+                  src={Logo}
+                  alt="logo"
+                  className="h-10 w-auto inline-block mr-2 bg-white rounded"
+                />
+              </h2>
+              <p
+                className="text-white mb-2 hover:text-pink-500 cursor-pointer"
+                onClick={handleMapClick}
+              >
+                <FontAwesomeIcon
+                  icon={faMapMarkerAlt}
+                  className="inline text-white mr-2"
+                />
+                8, Khasra No. 28
+                <br />
+                Kuri Bhagtasni, Jodhpur
+                <br />
+                Rajasthan, India 342013
+              </p>
+              <p
+                className="text-white py-2 cursor-pointer hover:text-pink-500"
+                onClick={handleEmailClick}
+              >
+                <FontAwesomeIcon
+                  icon={faEnvelope}
+                  className="inline text-white mr-2"
+                />
+                quarkcs0702@gmail.com
+              </p>
+              <p
+                className="text-white cursor-pointer hover:text-pink-500"
+                onClick={() => handlePhoneClick("+91 123456789")}
+              >
+                <FontAwesomeIcon
+                  icon={faPhone}
+                  className="inline text-white mr-2"
+                />
+                (+91) 7878308980
+              </p>
+            </div>
+          </div>
+          <div className="md:w-1/2 md:mr-8 flex justify-center md:order-1">
+            <form onSubmit={sendEmail} ref={form} className="w-full max-w-md">
+              <div className="mb-6">
+                <label htmlFor="name" className="text-white">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="user_name"
+                  className="px-4 py-2 mt-2 rounded-md text-black w-full focus:outline-none"
+                />
+              </div>
+              <div className="mb-6">
+                <label htmlFor="mobile" className="text-white">
+                  Mobile Number
+                </label>
+                <input
+                  type="number"
+                  id="mobile"
+                  name="user_mobile"
+                  className="px-4 py-2 mt-2 rounded-md text-black w-full focus:outline-none"
+                />
+              </div>
+              <div className="mb-6">
+                <label htmlFor="email" className="text-white">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="user_email"
+                  className="px-4 py-2 mt-2 rounded-md text-black w-full focus:outline-none"
+                />
+              </div>
+              <div className="mb-6">
+                <label htmlFor="message" className="text-white">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  className="px-4 py-2 mt-2 rounded-md text-black w-full focus:outline-none"
+                ></textarea>
+              </div>
+
+              <div className="mb-6 flex justify-center">
+                <button
+                  type="submit"
+                  value="Send"
+                  style={{ minWidth: "8rem" }}
+                  className="bg-blue-600 text-white md:w-1/4 flex-shrink-0 px-4 py-2 rounded-lg hover:bg-blue-900"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-        <div className="md:w-1/2 md:mr-8 flex justify-center md:order-1">
-          <form onSubmit={sendEmail} ref={form} className="w-full max-w-md">
-            <div className="mb-6">
-              <label htmlFor="name" className="text-white">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="user_name"
-                className="px-4 py-2 mt-2 rounded-md text-black w-full focus:outline-none"
-              />
-            </div>
-            <div className="mb-6">
-              <label htmlFor="mobile" className="text-white">
-                Mobile Number
-              </label>
-              <input
-                type="number"
-                id="mobile"
-                name="user_mobile"
-                className="px-4 py-2 mt-2 rounded-md text-black w-full focus:outline-none"
-              />
-            </div>
-            <div className="mb-6">
-              <label htmlFor="email" className="text-white">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="user_email"
-                className="px-4 py-2 mt-2 rounded-md text-black w-full focus:outline-none"
-              />
-            </div>
-            <div className="mb-6">
-              <label htmlFor="message" className="text-white">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows="4"
-                className="px-4 py-2 mt-2 rounded-md text-black w-full focus:outline-none"
-              ></textarea>
-            </div>
-
-            <div className="mb-6 flex justify-center">
-              <button
-                type="submit"
-                value="Send"
-                style={{ minWidth: "8rem" }}
-                className="bg-blue-600 text-white md:w-1/4 flex-shrink-0 px-4 py-2 rounded-lg hover:bg-blue-900"
-              >
-                Submit
-              </button>
-            </div>
-          </form>
-        </div>
       </div>
+
       <div className="m-8">
         <Faq faqs={faqs} defaultAllExpanded={false} />
       </div>
