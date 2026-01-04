@@ -25,29 +25,34 @@ const items = [
   },
   {
     title: "Chemical Testing",
-    text: "Comprehensive chemical analysis to determine composition, purity, and regulatory compliance.",
+    text: "Thorough chemical analysis to determine composition, purity, and regulatory compliance.",
     photo: img6,
   },
   {
     title: "Pharma Consultancy",
-    text: "Expert guidance in regulatory compliance, quality assurance, and pharmaceutical product development.",
+    text: "Expert guidance for pharmaceutical companies in regulatory compliance, quality assurance, and product development.",
     photo: img7,
   },
 ];
 
 const CircularRotatingListDemo = () => {
   return (
-    <section className="pt-24 text-center">
-      <h1 className="text-3xl sm:text-4xl font-bold mb-4">
-        Total Analytical & Research Solutions
-      </h1>
+    <section className="pt-16">
+      <div className="container mx-auto px-4 flex flex-col items-center text-center">
+        <h1 className="text-3xl sm:text-4xl font-bold mb-4">
+          Total Analytical & Research Solutions
+        </h1>
 
-      <hr className="w-48 h-1 mx-auto mb-12 bg-blue-300" />
+        <hr className="w-48 h-1 mx-auto mb-10 bg-blue-300" />
 
-      <CircularRotatingList items={items} />
+        {/* Perfectly centered circle */}
+        <CircularRotatingList items={items} />
 
-      {/* Mobile-friendly fallback */}
-      <CarouselMain items={items} />
+        {/* Mobile / fallback carousel */}
+        <div className="w-full mt-12">
+          <CarouselMain items={items} />
+        </div>
+      </div>
     </section>
   );
 };
