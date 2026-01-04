@@ -22,9 +22,9 @@ const Footer = () => {
     window.location.href = "mailto:info@impactagrosolutions.com";
   };
 
-  const handlePhoneClick = (phoneNumber) => {
-    window.location.href = `tel:${phoneNumber}`;
-  };
+  // const handlePhoneClick = (phoneNumber) => {
+  //   window.location.href = `tel:${phoneNumber}`;
+  // };
 
   return (
     <div className="bg-blue-800 text-gray-200">
@@ -39,20 +39,20 @@ const Footer = () => {
           <div className="md:w-3/4 md:ml-8 flex flex-col md:flex-row md:justify-end md:items-center">
             <div className="text-center md:text-left">
               <h2 className="text-2xl font-bold mb-4">Reach out</h2>
-              <p
+              {/* <p
                 className="mb-2 cursor-pointer hover:text-pink-400"
                 onClick={() => handlePhoneClick("+91 7878308980")}
               >
                 <FontAwesomeIcon icon={faPhone} className="mr-2  " />
                 (+91) 7878308980
-              </p>
+              </p> */}
               
               <p
                 className="mb-2 cursor-pointer hover:text-pink-400"
                 onClick={handleEmailClick}
               >
                 <FontAwesomeIcon icon={faEnvelope} className="mr-2" />
-                Email: quarkcs0702@gmail.com
+                Email: ho@quarkcs.in
               </p>
               <p className="mb-2">
                 <FontAwesomeIcon icon={faClock} className="mr-2" />
