@@ -1,10 +1,10 @@
 import CircularRotatingList from "../components/CircularRotatingList";
 import CarouselMain from "./CarouselMain";
 
+import img6 from "../assets/services/img6.jpg";
+import img5 from "../assets/services/img5.jpg";
 import img3 from "../assets/services/img3.jpg";
 import img4 from "../assets/services/img4.jpg";
-import img5 from "../assets/services/img5.jpg";
-import img6 from "../assets/services/img6.jpg";
 import img7 from "../assets/services/img7.jpg";
 
 const items = [
@@ -20,12 +20,12 @@ const items = [
   },
   {
     title: "Elemental Analysis",
-    text: "Accurate determination of elemental composition using advanced analytical techniques for quality control and research.",
+    text: "Accurate determination of elemental composition in samples using advanced analytical techniques for quality control and research.",
     photo: img4,
   },
   {
     title: "Chemical Testing",
-    text: "Thorough chemical analysis to determine composition, purity, and regulatory compliance.",
+    text: "Thorough analysis of substances to determine composition, purity, and regulatory compliance.",
     photo: img6,
   },
   {
@@ -45,7 +45,7 @@ const CircularRotatingListDemo = () => {
 
         <hr className="w-48 h-1 mx-auto mb-10 bg-blue-300" />
 
-        {/* Perfectly centered circle */}
+        {/* Centered circular component */}
         <CircularRotatingList items={items} />
 
         {/* Mobile / fallback carousel */}
