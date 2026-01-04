@@ -9,7 +9,7 @@ const CircularRotatingList = ({ items = [] }) => {
   const angleStep = 360 / total;
   const radius = 210;
 
-  // Stable auto-rotation
+  // Auto-rotate (stable interval)
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % total);
@@ -20,15 +20,15 @@ const CircularRotatingList = ({ items = [] }) => {
 
   return (
     <div className="relative w-[500px] h-[500px] flex items-center justify-center">
-      {/* Center Text */}
+      {/* Center text */}
       <div className="absolute w-[260px] text-center font-semibold px-4">
         {items[activeIndex].text}
       </div>
 
-      {/* Dashed Circle */}
+      {/* Dashed circle */}
       <div className="absolute w-[400px] h-[400px] rounded-full border border-dashed border-gray-400" />
 
-      {/* Rotating Items */}
+      {/* Rotating items */}
       <ul className="absolute inset-0">
         {items.map((item, index) => {
           const rotation = index * angleStep - activeIndex * angleStep;
