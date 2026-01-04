@@ -25,7 +25,7 @@ const Footer = () => {
           {/* Logo */}
           <div className="md:w-1/4 flex justify-center">
             <div className="bg-white rounded overflow-hidden p-2">
-              <img src={Logo} alt="Quark Logo" className="h-12 w-auto" />
+              <img src={Logo} alt="Quark Logo" className="h-10 w-auto" />
             </div>
           </div>
 
