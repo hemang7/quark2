@@ -1,49 +1,62 @@
-import React from "react";
 import { useEffect, useState } from "react";
 import about from "../assets/about.jpg";
-import "../index.css";
 
 const AboutUsPage = () => {
-  const [fadeIn, setFadeIn] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    setFadeIn(true);
+    const timer = setTimeout(() => setIsVisible(true), 100);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className=" mb-12 md:my-10" style={{ marginBottom: 150 }}>
-      <div className="container mx-auto px-4" style={{ paddingTop: "4%" }}>
-        <div className="flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2 mt-10">
-            <img src={about} alt="Company" className="m-auto rounded-md" />
+    <section className="mb-36 md:my-16">
+      <div className="container mx-auto px-4 pt-16">
+        <div className="flex flex-col md:flex-row items-center gap-10">
+          
+          {/* Image Section */}
+          <div className="md:w-1/2">
+            <img
+              src={about}
+              alt="About Quark Characterisation Services"
+              className="mx-auto rounded-lg shadow-md"
+            />
           </div>
-          <div className="md:w-1/2 mt-3 mr-10 ">
-            <h4
-              className={`flex justify-center text-5xl text-bold mb-5 sm:mt-5 mt-7 ${
-                fadeIn ? "fade-in" : ""
+
+          {/* Content Section */}
+          <div className="md:w-1/2">
+            <h2
+              className={`text-center text-4xl md:text-5xl font-bold mb-4 transition-opacity duration-700 ${
+                isVisible ? "opacity-100" : "opacity-0"
               }`}
             >
               About Us
-            </h4>
-            <hr className="w-48 h-1 mx-auto mb-12 bg-blue-300" />
+            </h2>
 
-            <div className={`fade-in ${fadeIn ? "fade-in-delayed" : ""}`}>
-              <p className="text-lg mt-8">
-                At Quark Characterisation Services, we are dedicated to providing
-                innovative solutions and delivering excellence to our clients.
-                With years of experience in the industry, our team of highly
-                skilled professionals is committed to helping businesses thrive
-                and succeed. Our team of experienced professionals combines
-                technical knowledge with strategic insights to deliver
-                innovative solutions. Whether it's process optimization, quality
-                control, regulatory compliance, or product development, we offer
-                specialized expertise across the chemical value chain.
-              </p>
-            </div>
+            <hr className="w-32 h-1 mx-auto mb-8 bg-blue-400 border-0" />
+
+            <p
+              className={`text-lg leading-relaxed transition-all duration-700 delay-200 ${
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4"
+              }`}
+            >
+              At <strong>Quark Characterisation Services</strong>, we are dedicated
+              to providing innovative solutions and delivering excellence to our
+              clients. With years of industry experience, our team of highly
+              skilled professionals helps businesses thrive through technical
+              expertise and strategic insights.
+              <br /><br />
+              From process optimization and quality control to regulatory
+              compliance and product development, we deliver specialized
+              solutions across the entire chemical value chain.
+            </p>
           </div>
+
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
