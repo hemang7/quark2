@@ -1,10 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPhone,
-  faEnvelope,
-  faMapMarkerAlt,
-} from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import emailjs from "emailjs-com";
 import { useToast } from "@chakra-ui/react";
 
@@ -23,30 +19,9 @@ const Contact = () => {
   }, []);
 
   const handleExternalLink = (url) => window.open(url, "_blank");
-  const handleEmailClick = () =>
-    (window.location.href = "mailto:quarkcs0702@gmail.com");
-  const handlePhoneClick = (phone) =>
-    (window.location.href = `tel:${phone}`);
 
-  const validateForm = () => {
-    const { user_name, user_email, user_mobile } = formRef.current;
-
-    if (!user_name.value.trim()) {
-      showError("Please enter your name.");
-      return false;
-    }
-
-    if (!/^\d{10}$/.test(user_mobile.value.trim())) {
-      showError("Mobile number must be 10 digits.");
-      return false;
-    }
-
-    if (!/\S+@\S+\.\S+/.test(user_email.value.trim())) {
-      showError("Please enter a valid email address.");
-      return false;
-    }
-
-    return true;
+  const handleEmailClick = () => {
+    window.location.href = "mailto:ho@quarkcs.in";
   };
 
   const showError = (message) =>
@@ -57,6 +32,22 @@ const Contact = () => {
       duration: 4000,
       isClosable: true,
     });
+
+  const validateForm = () => {
+    const { user_name, user_email } = formRef.current;
+
+    if (!user_name.value.trim()) {
+      showError("Please enter your name.");
+      return false;
+    }
+
+    if (!/\S+@\S+\.\S+/.test(user_email.value.trim())) {
+      showError("Please enter a valid email address.");
+      return false;
+    }
+
+    return true;
+  };
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -91,7 +82,7 @@ const Contact = () => {
     },
     {
       q: "How can I schedule a consultation?",
-      a: "You can contact us via phone or email to schedule a consultation.",
+      a: "You can contact us via email and our team will get back to you shortly.",
     },
     {
       q: "What are your areas of expertise?",
@@ -105,7 +96,7 @@ const Contact = () => {
 
   return (
     <section className="container mx-auto px-5 py-12">
-      {/* Header Section */}
+      {/* Header */}
       <div className="flex flex-col md:flex-row items-center gap-10 mb-12">
         <div className="md:w-1/2">
           <img
@@ -163,38 +154,33 @@ const Contact = () => {
               onClick={handleEmailClick}
             >
               <FontAwesomeIcon icon={faEnvelope} className="mr-2" />
-              quarkcs0702@gmail.com
-            </p>
-
-            <p
-              className="cursor-pointer hover:text-pink-400"
-              onClick={() => handlePhoneClick("+917878308980")}
-            >
-              <FontAwesomeIcon icon={faPhone} className="mr-2" />
-              (+91) 78783 08980
+              ho@quarkcs.in
             </p>
           </div>
 
-          {/* Form */}
+          {/* Contact Form */}
           <form
             ref={formRef}
             onSubmit={sendEmail}
             className="md:w-1/2 space-y-5"
           >
-            {[
-              ["Name", "text", "user_name"],
-              ["Mobile Number", "tel", "user_mobile"],
-              ["Email", "email", "user_email"],
-            ].map(([label, type, name]) => (
-              <div key={name}>
-                <label className="text-white">{label}</label>
-                <input
-                  type={type}
-                  name={name}
-                  className="w-full mt-2 px-4 py-2 rounded-md focus:outline-none"
-                />
-              </div>
-            ))}
+            <div>
+              <label className="text-white">Name</label>
+              <input
+                type="text"
+                name="user_name"
+                className="w-full mt-2 px-4 py-2 rounded-md focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="text-white">Email</label>
+              <input
+                type="email"
+                name="user_email"
+                className="w-full mt-2 px-4 py-2 rounded-md focus:outline-none"
+              />
+            </div>
 
             <div>
               <label className="text-white">Message</label>
