@@ -1,53 +1,64 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-const CircularRotatingList = ({ items }) => {
-  const [activeItem, setActiveItem] = useState(0);
+const CircularRotatingList = ({ items = [] }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const angle = -360 / items.length;
+  if (!items.length) return null;
+
+  const totalItems = items.length;
+  const angleStep = 360 / totalItems;
   const radius = 210;
-  const startAngle = -angle * activeItem;
 
-  const handleClick = (i) => {
-    setActiveItem(i);
-  };
-
+  // Auto rotate (stable interval)
   useEffect(() => {
-    const id = window.setInterval(() => {
-      setActiveItem((activeItem + 1) % items.length);
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % totalItems);
     }, 4000);
-    return () => window.clearInterval(id);
-  }, [activeItem]);
+
+    return () => clearInterval(interval);
+  }, [totalItems]);
 
   return (
-    <div className="relative w-[500px] h-[500px]  flex justify-center items-center ml-auto mr-auto mt-16">
-      <div className="w-[250px] h-[300px] text-center text-bold flex items-center">
-        {items[activeItem].text}
+    <div className="relative w-[500px] h-[500px] flex justify-center items-center mx-auto mt-16">
+      {/* Center text */}
+      <div className="w-[260px] h-[300px] text-center font-semibold flex items-center justify-center px-4">
+        {items[activeIndex].text}
       </div>
-      <div className="absolute rounded-full border border-black border-dashed w-[400px] h-[400px]"></div>
-      <ul>
-        {items.map((item, i) => (
-          <li
-            key={i}
-            className="z-10 absolute top-1/2 left-1/2 -mx-8 -my-8 transition duration-1000"
-            style={{
-              transform: `rotate(${
-                startAngle + i * angle
-              }deg) translateY(-${radius}px) rotate(${-(
-                startAngle +
-                i * angle
-              )}deg)`,
-            }}
-            onClick={() => handleClick(i)}
-          >
-            <span className="rounded-xl w-24 h-24 flex justify-center items-center cursor-pointer hover:bg-white">
-              <img
-                src={item.photo}
-                alt={item.alt}
-                className="rounded-full w-full h-full object-cover"
-              />
-            </span>
-          </li>
-        ))}
+
+      {/* Dashed circle */}
+      <div className="absolute rounded-full border border-dashed border-gray-400 w-[400px] h-[400px]" />
+
+      {/* Rotating items */}
+      <ul className="absolute inset-0">
+        {items.map((item, index) => {
+          const rotation = index * angleStep - activeIndex * angleStep;
+
+          return (
+            <li
+              key={index}
+              className="absolute top-1/2 left-1/2 transition-transform duration-1000 ease-in-out"
+              style={{
+                transform: `
+                  rotate(${rotation}deg)
+                  translateY(-${radius}px)
+                  rotate(${-rotation}deg)
+                `,
+              }}
+            >
+              <button
+                onClick={() => setActiveIndex(index)}
+                className="w-24 h-24 rounded-full overflow-hidden hover:scale-105 transition"
+                aria-label={item.title}
+              >
+                <img
+                  src={item.photo}
+                  alt={item.title}
+                  className="w-full h-full object-cover rounded-full"
+                />
+              </button>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
