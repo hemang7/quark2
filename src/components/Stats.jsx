@@ -23,7 +23,7 @@ const Stats = () => {
     <div className="w-screen h-80" style={{ marginTop: 50 }}>
       <div className="relative w-[90%] mx-auto rounded-sm p-5">
         <h4 className="mb-4 w-[100%] mx-auto text-center text-3xl sm:text-4xl font-bold text-black">
-          Trusted for excellence by many.
+          Trusted for excellence by clients.
         </h4>
 
         <hr className="w-48 h-1 mx-auto mb-12 bg-blue-300" />
