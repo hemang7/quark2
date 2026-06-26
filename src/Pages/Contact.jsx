@@ -37,9 +37,9 @@ const Contact = () => {
     toast({ title: "Error", description: message, status: "error", duration: 4000, isClosable: true });
 
   const validateForm = () => {
-    const { user_name, user_email } = formRef.current;
-    if (!user_name.value.trim()) { showError("Please enter your name."); return false; }
-    if (!/\S+@\S+\.\S+/.test(user_email.value.trim())) {
+    const { name, email } = formRef.current;
+    if (!name.value.trim()) { showError("Please enter your name."); return false; }
+    if (!/\S+@\S+\.\S+/.test(email.value.trim())) {
       showError("Please enter a valid email address.");
       return false;
     }
@@ -50,7 +50,7 @@ const Contact = () => {
     e.preventDefault();
     if (!validateForm()) return;
     emailjs
-      .sendForm("service_4ayasi7", "template_fehl4rg", formRef.current, "S5aRZd3ms3a8WGUnm")
+      .sendForm("service_8bzyb3r", "template_rf7cvmr", formRef.current, "uOIZJKhpS11ZyW8d2")
       .then(() => {
         e.target.reset();
         toast({ title: "Thank you!", description: "We'll get in touch with you shortly.", status: "success", duration: 4000, isClosable: true });
@@ -218,7 +218,7 @@ const Contact = () => {
                 </label>
                 <input
                   type="text"
-                  name="user_name"
+                  name="name"
                   placeholder="Your full name"
                   style={inputStyle}
                   onFocus={(e) => {
@@ -240,7 +240,7 @@ const Contact = () => {
                 </label>
                 <input
                   type="email"
-                  name="user_email"
+                  name="email"
                   placeholder="your@email.com"
                   style={inputStyle}
                   onFocus={(e) => {
