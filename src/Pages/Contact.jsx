@@ -1,12 +1,10 @@
 import { useRef, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
-import emailjs from "emailjs-com";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import emailjs from "@emailjs/browser";
 import { useToast } from "@chakra-ui/react";
 import contact from "../assets/contact.jpg";
 import Logo from "../assets/logo-full.png";
-import Faq from "../components/Faq";
-
 const inputStyle = {
   width: "100%",
   padding: "0.625rem 0.875rem",
@@ -30,7 +28,6 @@ const Contact = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleExternalLink = (url) => window.open(url, "_blank");
   const handleEmailClick = () => { window.location.href = "mailto:ho@quarkcs.in"; };
 
   const showError = (message) =>
@@ -49,21 +46,28 @@ const Contact = () => {
   const sendEmail = (e) => {
     e.preventDefault();
     if (!validateForm()) return;
+
+    const form = formRef.current;
+    const templateParams = {
+      name:    form.name.value.trim(),
+      email:   form.email.value.trim(),
+      message: form.message.value.trim(),
+      title:   "Website Enquiry",
+      time:    new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+    };
+
     emailjs
-      .sendForm("service_8bzyb3r", "template_rf7cvmr", formRef.current, "uOIZJKhpS11ZyW8d2")
+      .send("service_j95bo09", "template_wu3fbbl", templateParams, "tXAoJJ6OgtME6iZMG")
       .then(() => {
         e.target.reset();
         toast({ title: "Thank you!", description: "We'll get in touch with you shortly.", status: "success", duration: 4000, isClosable: true });
       })
-      .catch(() => showError("Something went wrong. Please try again later."));
+      .catch((err) => {
+        console.error("EmailJS error:", err);
+        showError("Something went wrong. Please try again later.");
+      });
   };
 
-  const faqs = [
-    { q: "What services do we offer?", a: "We provide consultancy services in optimization, product development, quality control, and regulatory compliance." },
-    { q: "How can I schedule a consultation?", a: "You can contact us via email and our team will get back to you shortly." },
-    { q: "What are your areas of expertise?", a: "We specialize in process optimization, regulatory compliance, and quality control." },
-    { q: "Do you help with regulatory approvals?", a: "Yes, we assist in obtaining certifications and regulatory approvals." },
-  ];
 
   return (
     <main className="bg-white min-h-screen" style={{ paddingTop: "70px" }}>
@@ -167,23 +171,6 @@ const Contact = () => {
                 Reach out for inquiries, quotes, or to schedule a consultation with our expert team.
               </p>
 
-              <button
-                className="flex items-start gap-3 group transition-colors duration-200"
-                onClick={() => handleExternalLink("https://www.google.com/maps/search/khasra+number+28+kuri+bhagtasni+jodhpur/")}
-              >
-                <span
-                  className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
-                  style={{ background: "#EFF6FF", color: "#2563EB" }}
-                >
-                  <FontAwesomeIcon icon={faMapMarkerAlt} />
-                </span>
-                <span
-                  className="text-left group-hover:text-blue-600 transition-colors"
-                  style={{ fontFamily: '"DM Sans", sans-serif', fontSize: "0.9375rem", color: "#475569", lineHeight: 1.6 }}
-                >
-                  8, Khasra No. 28, Kuri Bhagtasni, Jodhpur, Rajasthan
-                </span>
-              </button>
 
               <button
                 className="flex items-center gap-3 group transition-colors duration-200"
@@ -286,8 +273,6 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* FAQ */}
-        <Faq faqs={faqs} />
       </section>
     </main>
   );

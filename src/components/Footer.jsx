@@ -170,7 +170,6 @@ const Footer = () => {
             <nav className="flex flex-col" style={{ gap: "0.875rem" }}>
               <FooterLink to="/about">About</FooterLink>
               <FooterLink to="/contact">Contact</FooterLink>
-              <FooterLink to="/contact">FAQs</FooterLink>
             </nav>
           </div>
 
@@ -194,17 +193,9 @@ const Footer = () => {
             </ContactRow>
 
             <ContactRow icon={<FontAwesomeIcon icon={faClock} />}>
-              Mon – Fri, 10:00 am – 6:00 pm IST
+              Mon – Fri, 10:00 am – 6:00 pm
             </ContactRow>
 
-            <ContactRow icon={
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="14" height="14" strokeWidth={1.8}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-              </svg>
-            }>
-              8, Khasra No. 28, Kuri Bhagtasni,<br />Jodhpur, Rajasthan
-            </ContactRow>
           </div>
 
         </div>

@@ -58,19 +58,6 @@ const AnalyticalRDSolutions = () => {
           Experience Best-in-Class Analytical &amp; R&amp;D Solutions
         </h2>
 
-        {/* Body */}
-        <p
-          className="max-w-xl mx-auto mb-10"
-          style={{
-            fontFamily: '"DM Sans", sans-serif',
-            fontSize: "1.125rem",
-            color: "#475569",
-            lineHeight: 1.8,
-          }}
-        >
-          Dedicated to supporting your business 24/7
-        </p>
-
         {/* CTA */}
         <Link
           to="/contact"
