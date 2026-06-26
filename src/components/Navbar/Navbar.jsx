@@ -155,7 +155,8 @@ const Navbar = () => {
           <img
             src={Logo}
             alt="Quark Characterisation Services"
-            style={{ height: "38px", width: "auto", display: "block" }}
+            className="w-auto"
+            style={{ height: "clamp(24px, 5vw, 38px)", display: "block" }}
           />
         </Link>
 

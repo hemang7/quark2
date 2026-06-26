@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import CarouselMain from "./CarouselMain";
 import img6 from "../assets/services/img6.jpg";
 import img5 from "../assets/services/img5.jpg";
 import img3 from "../assets/services/img3.jpg";
@@ -187,9 +186,11 @@ const CircularRotatingListDemo = () => {
           ))}
         </div>
 
-        {/* ── Mobile carousel (shown below md) ─────────────────────────── */}
-        <div className="md:hidden">
-          <CarouselMain />
+        {/* ── Mobile card list (shown below md) ────────────────────────── */}
+        <div className="md:hidden flex flex-col gap-6">
+          {items.map((item, i) => (
+            <ServiceCard key={item.id} {...item} index={i} visible={visible} />
+          ))}
         </div>
 
       </div>

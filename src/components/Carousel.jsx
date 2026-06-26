@@ -37,31 +37,6 @@ export default function Carroussel(props) {
         marginTop: 50,
       }}
     >
-      {/* Heading */}
-      <div className="text-center mb-12">
-        <h2
-          className="font-display"
-          style={{
-            fontFamily: '"DM Serif Display", Georgia, serif',
-            fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
-            color: "#0A2540",
-            lineHeight: 1.15,
-          }}
-        >
-          Our Services
-        </h2>
-        <div
-          style={{
-            display: "block",
-            width: "80px",
-            height: "2px",
-            background: "#2563EB",
-            borderRadius: "9999px",
-            margin: "1rem auto 0",
-          }}
-        />
-      </div>
-
       <Carousel
         slides={cards}
         goToSlide={goToSlide}
