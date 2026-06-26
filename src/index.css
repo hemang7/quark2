@@ -1,0 +1,191 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+    background-color: #ffffff;
+    color: #475569;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: "DM Serif Display", Georgia, serif;
+    color: #0A2540;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "DM Serif Display", Georgia, serif;
+  }
+
+  /* Section label pill */
+  .label-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #2563EB;
+    border: 1px solid #BFDBFE;
+    border-radius: 9999px;
+    padding: 0.25rem 0.875rem;
+    background: #EFF6FF;
+  }
+
+  /* Electric blue underline divider */
+  .section-divider {
+    display: block;
+    width: 80px;
+    height: 2px;
+    background: #2563EB;
+    border-radius: 9999px;
+    margin: 0 auto;
+  }
+
+  /* Section divider left-aligned */
+  .section-divider-left {
+    display: block;
+    width: 80px;
+    height: 2px;
+    background: #2563EB;
+    border-radius: 9999px;
+  }
+
+  /* Primary CTA button */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #2563EB;
+    color: #ffffff;
+    font-family: "DM Sans", sans-serif;
+    font-weight: 500;
+    padding: 0.875rem 2rem;
+    border-radius: 9999px;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .btn-primary:hover {
+    background: #1D4ED8;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.45);
+    transform: scale(1.03);
+  }
+
+  /* Molecular hex SVG background pattern — barely visible */
+  .hex-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%230A2540' stroke-width='0.8'%3E%3Cpolygon points='30,4 52,17 52,43 30,56 8,43 8,17'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 60px 60px;
+    background-repeat: repeat;
+    opacity: 0.04;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+}
+
+/* Scroll fade-in reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease-out, transform 0.65s ease-out;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for child reveals */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* Nav link underline animation */
+.nav-link {
+  position: relative;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.9375rem;
+  color: #475569;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  padding: 0.25rem 0;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #2563EB;
+  border-radius: 9999px;
+  transition: width 0.25s ease;
+}
+
+.nav-link:hover {
+  color: #2563EB;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link.active {
+  color: #2563EB;
+}
+
+/* Hero video overlay — strong white on left, fades to transparent at center */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(255,255,255,0.97) 0%,
+    rgba(255,255,255,0.92) 30%,
+    rgba(255,255,255,0.65) 55%,
+    rgba(255,255,255,0.08) 80%,
+    rgba(255,255,255,0) 100%
+  );
+  z-index: 2;
+}
+
+/* Subtle radial glow for CTA section */
+.cta-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(37, 99, 235, 0.05) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Service section background */
+.section-offwhite {
+  background-color: #F8FAFC;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #F1F5F9; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #2563EB; }
+
+/* Responsive hero font */
+@media (max-width: 768px) {
+  .hero-headline { font-size: 2.5rem !important; }
+}
