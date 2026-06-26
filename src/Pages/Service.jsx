@@ -132,7 +132,7 @@ const Service = () => {
             transition: "opacity 0.7s ease-out 0.35s",
           }}
         >
-          <Link to="/contact" className="btn-primary">
+          <Link to="/contact" className="btn-primary w-full sm:w-auto text-center">
             Enquire About This Service
           </Link>
         </div>

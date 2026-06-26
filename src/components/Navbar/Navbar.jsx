@@ -285,7 +285,8 @@ const Navbar = () => {
       <div
         className="md:hidden overflow-hidden transition-all duration-300 bg-white"
         style={{
-          maxHeight: mobileOpen ? "520px" : "0",
+          maxHeight: mobileOpen ? "calc(100dvh - 64px)" : "0",
+          overflowY: mobileOpen ? "auto" : "hidden",
           opacity: mobileOpen ? 1 : 0,
           borderTop: mobileOpen ? "1px solid #F1F5F9" : "none",
           boxShadow: mobileOpen ? "0 12px 32px rgba(0,0,0,0.08)" : "none",
