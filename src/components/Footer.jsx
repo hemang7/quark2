@@ -1,88 +1,260 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronUp, faEnvelope, faClock } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faClock } from "@fortawesome/free-solid-svg-icons";
 import Logo from "../assets/logo-full.png";
 
+/* ─── Animated footer link ────────────────────────────────────────────────── */
+const FooterLink = ({ to, href, onClick, children }) => {
+  const [hovered, setHovered] = useState(false);
+
+  const baseStyle = {
+    fontFamily: '"DM Sans", sans-serif',
+    fontSize: "0.9375rem",
+    fontWeight: 400,
+    lineHeight: 1.5,
+    color: hovered ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.58)",
+    textDecoration: "none",
+    background: "none",
+    border: "none",
+    padding: 0,
+    cursor: "pointer",
+    position: "relative",
+    display: "inline-flex",
+    alignItems: "center",
+    transition: "color 0.2s ease",
+    paddingBottom: "1px",
+  };
+
+  const underline = (
+    <span
+      aria-hidden
+      style={{
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        height: "1px",
+        width: hovered ? "100%" : "0%",
+        background: "rgba(255,255,255,0.35)",
+        transition: "width 0.2s ease",
+        pointerEvents: "none",
+      }}
+    />
+  );
+
+  const handlers = {
+    onMouseEnter: () => setHovered(true),
+    onMouseLeave: () => setHovered(false),
+  };
+
+  if (href) return (
+    <a href={href} style={baseStyle} {...handlers}>{children}{underline}</a>
+  );
+  if (to) return (
+    <Link to={to} style={baseStyle} {...handlers}>{children}{underline}</Link>
+  );
+  return (
+    <button style={baseStyle} onClick={onClick} {...handlers}>{children}{underline}</button>
+  );
+};
+
+/* ─── Column heading ──────────────────────────────────────────────────────── */
+const ColHeading = ({ children }) => (
+  <p
+    style={{
+      fontFamily: '"DM Sans", sans-serif',
+      fontSize: "0.6875rem",
+      fontWeight: 600,
+      letterSpacing: "0.1em",
+      textTransform: "uppercase",
+      color: "rgba(255,255,255,0.95)",
+      margin: "0 0 1.5rem 0",
+    }}
+  >
+    {children}
+  </p>
+);
+
+/* ─── Contact row with icon ───────────────────────────────────────────────── */
+const ContactRow = ({ icon, children, strong }) => (
+  <div
+    className="flex items-start gap-3"
+    style={{ marginBottom: "1rem" }}
+  >
+    <span
+      style={{
+        color: "rgba(255,255,255,0.35)",
+        marginTop: "2px",
+        flexShrink: 0,
+        fontSize: "0.875rem",
+      }}
+    >
+      {icon}
+    </span>
+    <span
+      style={{
+        fontFamily: '"DM Sans", sans-serif',
+        fontSize: strong ? "0.9375rem" : "0.875rem",
+        fontWeight: strong ? 500 : 400,
+        color: strong ? "rgba(255,255,255,0.88)" : "rgba(255,255,255,0.55)",
+        lineHeight: 1.6,
+      }}
+    >
+      {children}
+    </span>
+  </div>
+);
+
+/* ─── Footer ──────────────────────────────────────────────────────────────── */
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
-  const handleEmailClick = () => { window.location.href = "mailto:ho@quarkcs.in"; };
 
   return (
-    <footer style={{ backgroundColor: "#0A2540", borderTop: "1px solid rgba(255,255,255,0.1)" }}>
-      <div className="max-w-6xl mx-auto px-6 py-16">
-        <div className="flex flex-col md:flex-row gap-12 items-start justify-between">
-          {/* Brand */}
-          <div className="flex flex-col gap-3 max-w-xs">
-            <div>
-              <div style={{
-                display: "inline-block",
-                background: "#ffffff",
-                borderRadius: "10px",
-                padding: "8px 14px",
-              }}>
+    <footer style={{ backgroundColor: "#0A2540" }}>
+
+      {/* ── Top separator ─────────────────────────────────────────────────── */}
+      <div style={{ height: "1px", background: "rgba(255,255,255,0.07)" }} />
+
+      {/* ── Main content ──────────────────────────────────────────────────── */}
+      <div
+        className="max-w-7xl mx-auto"
+        style={{ padding: "120px 48px 64px" }}
+      >
+        {/* Four-column grid */}
+        <div
+          className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8"
+          style={{ alignItems: "start" }}
+        >
+
+          {/* ── Col 1: Brand (40%) ──────────────────────────────────────── */}
+          <div className="md:col-span-5" style={{ paddingRight: "clamp(0px, 4vw, 48px)" }}>
+
+            {/* Logo in minimal white stamp */}
+            <div style={{ marginBottom: "1.75rem" }}>
+              <div
+                style={{
+                  display: "inline-block",
+                  background: "#ffffff",
+                  borderRadius: "5px",
+                  padding: "6px 12px",
+                }}
+              >
                 <img
                   src={Logo}
                   alt="Quark Characterisation Services"
-                  style={{ height: "28px", width: "auto", display: "block" }}
+                  style={{ height: "32px", width: "auto", display: "block" }}
                 />
               </div>
             </div>
-            <p style={{ color: "#94A3B8", fontSize: "0.875rem", lineHeight: 1.7, fontFamily: '"DM Sans", sans-serif' }}>
-              Precision-driven analytical and R&D services for pharma, food, and beyond.
+
+            {/* Description */}
+            <p
+              style={{
+                fontFamily: '"DM Sans", sans-serif',
+                fontSize: "0.9375rem",
+                fontWeight: 400,
+                lineHeight: 1.8,
+                color: "rgba(255,255,255,0.62)",
+                maxWidth: "340px",
+                margin: "0 0 2rem 0",
+              }}
+            >
+              Delivering precision analytical and materials characterisation services for research, pharmaceuticals, manufacturing and industrial innovation.
             </p>
+
           </div>
 
-          {/* Contact info */}
-          <div className="space-y-3">
-            <h3
-              className="font-semibold mb-4"
-              style={{ color: "#ffffff", fontFamily: '"DM Sans", sans-serif', fontSize: "0.875rem", letterSpacing: "0.05em", textTransform: "uppercase" }}
-            >
-              Reach Out
-            </h3>
-            <button
-              className="flex items-center gap-2.5 transition-colors duration-200 hover:text-white group"
-              style={{ color: "#94A3B8", fontFamily: '"DM Sans", sans-serif', fontSize: "0.875rem" }}
-              onClick={handleEmailClick}
-            >
-              <FontAwesomeIcon icon={faEnvelope} style={{ color: "#2563EB" }} />
-              ho@quarkcs.in
-            </button>
-            <p
-              className="flex items-center gap-2.5"
-              style={{ color: "#94A3B8", fontFamily: '"DM Sans", sans-serif', fontSize: "0.875rem" }}
-            >
-              <FontAwesomeIcon icon={faClock} style={{ color: "#2563EB" }} />
-              Mon – Fri, 10am – 6pm
-            </p>
-            <p style={{ color: "#64748B", fontFamily: '"DM Sans", sans-serif', fontSize: "0.8125rem" }}>
-              FAQs &amp; Frequently Asked Questions
-            </p>
+          {/* ── Col 2: Company ──────────────────────────────────────────── */}
+          <div className="md:col-span-2">
+            <ColHeading>Company</ColHeading>
+            <nav className="flex flex-col" style={{ gap: "0.875rem" }}>
+              <FooterLink to="/about">About</FooterLink>
+              <FooterLink to="/contact">Contact</FooterLink>
+              <FooterLink to="/contact">FAQs</FooterLink>
+            </nav>
           </div>
+
+          {/* ── Col 3: Reach Out ────────────────────────────────────────── */}
+          <div className="md:col-span-3">
+            <ColHeading>Reach Out</ColHeading>
+
+            <ContactRow strong icon={<FontAwesomeIcon icon={faEnvelope} />}>
+              <a
+                href="mailto:ho@quarkcs.in"
+                style={{
+                  color: "inherit",
+                  textDecoration: "none",
+                  transition: "color 0.2s ease",
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.95)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = "inherit"; }}
+              >
+                ho@quarkcs.in
+              </a>
+            </ContactRow>
+
+            <ContactRow icon={<FontAwesomeIcon icon={faClock} />}>
+              Mon – Fri, 10:00 am – 6:00 pm IST
+            </ContactRow>
+
+            <ContactRow icon={
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="14" height="14" strokeWidth={1.8}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+              </svg>
+            }>
+              8, Khasra No. 28, Kuri Bhagtasni,<br />Jodhpur, Rajasthan
+            </ContactRow>
+          </div>
+
         </div>
       </div>
 
-      {/* Bottom bar */}
+      {/* ── Bottom bar ────────────────────────────────────────────────────── */}
+      <div style={{ height: "1px", background: "rgba(255,255,255,0.07)" }} />
       <div
-        className="px-6 py-4 flex items-center justify-between"
-        style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
+        className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+        style={{ padding: "24px 48px" }}
       >
-        <p style={{ color: "#475569", fontFamily: '"DM Sans", sans-serif', fontSize: "0.8125rem" }}>
-          © {currentYear} Quark Characterisation Services. All rights reserved.
-        </p>
-        <button
-          aria-label="Scroll to top"
-          onClick={scrollToTop}
-          className="flex items-center justify-center w-8 h-8 rounded-full transition-all duration-300 hover:scale-110"
+        <p
           style={{
-            background: "rgba(37,99,235,0.15)",
-            border: "1px solid rgba(37,99,235,0.3)",
-            color: "#2563EB",
+            fontFamily: '"DM Sans", sans-serif',
+            fontSize: "0.8125rem",
+            fontWeight: 400,
+            color: "rgba(255,255,255,0.32)",
+            margin: 0,
+            letterSpacing: "0.01em",
           }}
         >
-          <FontAwesomeIcon icon={faChevronUp} style={{ fontSize: "0.75rem" }} />
-        </button>
+          © {currentYear} Quark Characterisation Services. All rights reserved.
+        </p>
+
+        <div className="flex items-center gap-6">
+          {[
+            { label: "Privacy Policy", href: "#" },
+            { label: "Terms", href: "#" },
+          ].map(({ label, href }) => (
+            <a
+              key={label}
+              href={href}
+              style={{
+                fontFamily: '"DM Sans", sans-serif',
+                fontSize: "0.8125rem",
+                color: "rgba(255,255,255,0.32)",
+                textDecoration: "none",
+                transition: "color 0.2s ease",
+                letterSpacing: "0.01em",
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.7)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.32)"; }}
+            >
+              {label}
+            </a>
+          ))}
+
+        </div>
       </div>
+
     </footer>
   );
 };
